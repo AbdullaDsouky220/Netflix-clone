@@ -1,24 +1,62 @@
 import Input from "@/components/Input"
+import axios from "axios"
+import { signIn } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState, useCallback } from 'react'
+import { useRouter } from "next/router"
 const Auth = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        name: ''
+    })
+
+    const router = useRouter()
     const [variant, setVariant] = useState('login')
 
-    const onChange = (e: any, handler: any) => {
-        handler(e.target.value)
-    }
 
     const toggleVariant = useCallback(() => (
         setVariant(currentvalue => currentvalue === 'login' ? 'register' : 'login'))
         ,
         []
     )
+    const loginUser = useCallback(async () => {
+        try {
+            await signIn('credientials', {...formData, redirect: false, callbackUrl: "/"} )
+            // router.push('/')
+            setFormData({
+                email: '',
+                password: '',
+                name:''
+            })
 
+        } catch (error) {
+            console.log(error);
+
+        }
+    }, [formData])
+
+    //register usre handler
+
+    const registerUser = useCallback(async () => {
+        try {
+             axios.post('./api/register', formData)
+            setFormData({
+                email: '',
+                password: '',
+                name: ''
+            })
+            // router.push('/')
+
+        } catch (error) {
+            console.log('the error for abdullah dsouky hoyyyyyyyy',error);
+
+        }
+    }, [formData,])
+
+    
 
 
     return (
@@ -48,8 +86,8 @@ const Auth = () => {
                                 variant === 'register' && (
                                     <Input
                                         id="name"
-                                        value={name}
-                                        onChange={(e: any) => onChange(e, setName)}
+                                        value={formData.name}
+                                        onChange={(e: any) => setFormData({ ...formData, name: e.target.value })}
                                         placeHolderCaption={'Username'}
                                         type={'text'} />
                                 )
@@ -57,19 +95,21 @@ const Auth = () => {
 
                             <Input
                                 id="email"
-                                value={email}
-                                onChange={(e: any) => onChange(e, setEmail)}
+                                value={formData.email}
+                                onChange={(e: any) => setFormData({ ...formData, email: e.target.value })}
+
                                 placeHolderCaption={'Email or Phone number'}
                                 type={'email'} />
                             <Input
-                                value={password}
+                                value={formData.password}
                                 id="password"
-                                onChange={(e: any) => onChange(e, setPassword)}
+                                onChange={(e: any) => setFormData({ ...formData, password: e.target.value })}
+
 
                                 placeHolderCaption="password"
                                 type={'password'} />
                             <button
-
+                                onClick={ variant==='login'?loginUser: registerUser}
                                 className=" bg-red-600/90 text-center p-4 font-semibold text-lg rounded-md cursor-pointer" >
                                 {
                                     variant === 'login' ? 'Sign In' : 'Sign Up'

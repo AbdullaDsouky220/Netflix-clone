@@ -5,3 +5,14 @@ declare global {
         var prismadb:PrismaClient
     }
 }
+
+type User={
+    id             :number,
+    image          :string,
+    email         : string ,
+    emailVerified : string,
+    hashedPassword :string,
+    createdAt     : string,
+    updatedAt     : string,
+    favoriteIds   : String,
+}
