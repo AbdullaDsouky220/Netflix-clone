@@ -24,8 +24,16 @@ const Auth = () => {
     )
     const loginUser = useCallback(async () => {
         try {
-            await signIn('credientials', {...formData, redirect: false, callbackUrl: "/"} )
-            // router.push('/')
+             const email=formData.email
+             const password=formData.password
+
+             await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/'
+              });
+            router.push('/')
             setFormData({
                 email: '',
                 password: '',
@@ -48,13 +56,13 @@ const Auth = () => {
                 password: '',
                 name: ''
             })
-            // router.push('/')
+            router.push('/')
 
         } catch (error) {
             console.log('the error for abdullah dsouky hoyyyyyyyy',error);
 
         }
-    }, [formData,])
+    }, [formData,router])
 
     
 

@@ -1,12 +1,12 @@
 import NextAuth, { AuthOptions } from 'next-auth';
 import prismadb from '@/lib/prismadb'
-import bcrypt from 'bcrypt'
+import {compare} from 'bcrypt'
 import CredentialsProvider from "next-auth/providers/credentials"
 import { User } from '@/global';
 export const authOptions:AuthOptions = {
     providers: [
         CredentialsProvider({
-            name: "credientials",
+            name: "credentials",
             credentials: {
                 username: {
                     label: "Username",
@@ -23,32 +23,32 @@ export const authOptions:AuthOptions = {
 
                 },
             },
-            async authorize(credentials:any) {
-
-                if (!credentials.email || !credentials.password) {
-                    throw new Error('Please enter an email and password')
+            async authorize(credentials) {
+                if (!credentials?.email || !credentials?.password) {
+                  throw new Error('Email and password required');
                 }
-
-                const user:any= await prismadb.user.findUnique({
-                    where: {
-                        email: credentials.email
-                    }
-                })
-
-                if (!user || user?.hashedPassword !== credentials.password) {
-                    throw new Error('use is not found ')
+        
+                const user = await prismadb.user.findUnique({ where: {
+                  email: credentials.email
+                }});
+        
+                if (!user || !user.hashedPassword) {
+                  throw new Error('Email does not exist');
                 }
-
-                const passwordMatch = await bcrypt.compare(credentials.password, user?.hashedPassword)
-
-                if (!passwordMatch) {
-                    throw new Error('please enter a valid password')
+        
+                const isCorrectPassword = await compare(credentials.password, user.hashedPassword);
+        
+                if (!isCorrectPassword) {
+                  throw new Error('Incorrect password');
                 }
-                return user
-
-            }
+        
+                return user;
+              }
         })
     ],
+    pages:{
+        signIn:"/auth"
+    },
     secret: process.env.NEXTAUTH_SECRET,
     debug: process.env.NODE_ENV === "development",
     session: {

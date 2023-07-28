@@ -16,7 +16,7 @@ export  default  async function   POST (request,res){
 
 
     if(isExist) {
-        throw new Error('Email already exists')
+        return res.status(200).json('Email already exists')
     }
 
     const hashedPassword = await  bcrypt.hash(password, 10);
