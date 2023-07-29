@@ -3,6 +3,7 @@ import axios from "axios"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
+import Button from '@/components/Button'
 import React, { useState, useCallback } from 'react'
 import { useRouter } from "next/router"
 const Auth = () => {
@@ -44,7 +45,7 @@ const Auth = () => {
             console.log(error);
 
         }
-    }, [formData])
+    }, [formData,router])
 
     //register usre handler
 
@@ -144,6 +145,8 @@ const Auth = () => {
 
                             }
                             </div>
+
+                            <Button/>
                             <div className="text-normal mt-12 text-slate-500">
 
 
