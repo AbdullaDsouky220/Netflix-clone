@@ -32,9 +32,8 @@ const Auth = () => {
                 email,
                 password,
                 redirect: false,
-                callbackUrl: '/'
+                callbackUrl: '/profile'
               });
-            router.push('/')
             setFormData({
                 email: '',
                 password: '',
@@ -45,7 +44,7 @@ const Auth = () => {
             console.log(error);
 
         }
-    }, [formData,router])
+    }, [formData])
 
     //register usre handler
 
@@ -57,13 +56,12 @@ const Auth = () => {
                 password: '',
                 name: ''
             })
-            router.push('/')
-
+            loginUser()
         } catch (error) {
             console.log('the error for abdullah dsouky hoyyyyyyyy',error);
 
         }
-    }, [formData,router])
+    }, [formData,loginUser])
 
     
 

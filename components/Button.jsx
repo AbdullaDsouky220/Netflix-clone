@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react"
 function Button() {
   return (
     <div className='text-red-100 flex items-center flex-col gap-2'>  <button
-    onClick={() => signIn("github" ,{ callbackUrl: '/' })}
+    onClick={() => signIn("github" ,{ callbackUrl: '/profile' })}
     ariaLabel="Continue with github"
     role="button"
     className="focus:outline-none  focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center text-white max-w-[300px] "
@@ -27,7 +27,7 @@ function Button() {
   </button>
   <button
   // onClick={()=>signIn('google')}
-  onClick={() => signIn("google" ,{ callbackUrl: '/' })}
+  onClick={() => signIn("google" ,{ callbackUrl: '/profile' })}
     ariaLabel="Continue with google"
     role="button"
     className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center max-w-[300px] "  >
