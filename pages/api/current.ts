@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import serverAuth from "../../lib/serverAuth";
-
+import prisma from '../../lib/prismadb'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method !== 'GET') {
@@ -8,10 +8,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const { currentUser } = await serverAuth(req, res);
-
     return res.status(200).json(currentUser);
   } catch (error) {
     console.log(error);
     return res.status(500).end();
   }
 }
+

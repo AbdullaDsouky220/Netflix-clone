@@ -38,6 +38,7 @@ console.log('change',window.scrollY);
   
   return (
     <div className={`
+    z-40
     flex flex-row items-center justify-between 
      text-white
      sticky top-0
