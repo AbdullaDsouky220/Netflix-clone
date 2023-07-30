@@ -4,13 +4,13 @@ const Billboard = () => {
   const { data: movie } = useBillboard();
   console.log(movie);
   return (
-    <div className=" w-screen bg-blue-400  relative min-h-[60vh] -mt-[56px] ">
-      <div className="w-screen  bg-red-400  min-h-[40vh]">
+    <div className=" w-screen   relative max-h-[60vw] -mt-[56px] ">
+      <div className="w-screen  min-w-[100%]">
         <video
           src={movie?.videoUrl}
           poster={movie?.thumbnailUrl}
           muted
-          className="w-screen min-h-[100%] "
+          className=" min-w-[100%] "
           autoPlay
         />
       </div>
