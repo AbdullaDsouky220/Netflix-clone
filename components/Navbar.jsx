@@ -4,6 +4,7 @@ import NavbarItem from "../components/NavbarItem";
 import MobileMenu from "../components/MobileMenu";
 import AccountsMenu from "../components/AccountsMenu";
 import logo from "../public/images/logo.png";
+import {useRouter} from 'next/router'
 const Navbar = () => {
   const listItems = [
     "Home",
@@ -13,7 +14,7 @@ const Navbar = () => {
     "Browse by languages",
     "My List",
   ];
-
+const router=useRouter()
   const [showBackground,setShowBackround]=useState(false)
 
   useEffect(() => {
@@ -48,8 +49,8 @@ console.log('change',window.scrollY);
      ${showBackground?'bg-zinc-900': '' }`}>
     <div className="flex flex-row items-center" >
 
-      <div className=" py-4 px-4 mr-10">
-        <Image src={logo} height={100} width={100} alt="image" />
+      <div className=" py-4 px-4 mr-10 cursor-pointer">
+        <Image src={logo} height={100} onClick={()=>router.push('/')} width={100} alt="image" />
       </div>
         {/* list for pc */}
         <div className=" px-8 hidden md:flex flex-row gap-4 text-sm text-slate-200">

@@ -4,20 +4,20 @@ const Billboard = () => {
   const { data: movie } = useBillboard();
   console.log(movie);
   return (
-    <div className=" w-screen relative min-h-[80vh] -mt-[56px] ">
-      <div className="w-screen    h-[50%]">
+    <div className=" w-screen bg-blue-400  relative min-h-[60vh] -mt-[56px] ">
+      <div className="w-screen  bg-red-400  min-h-[40vh]">
         <video
           src={movie?.videoUrl}
           poster={movie?.thumbnailUrl}
           muted
-          className="w-screen max-h-[65%] "
+          className="w-screen min-h-[100%] "
           autoPlay
         />
       </div>
-      <div className="absolute py-16 pl-8  lg:top-[15%] top-[10%] xl:top-[30%] flex flex-col gap-6">
+      <div className="absolute p-16   md:top-[10%] lg:top-[15%] top-[0%] xl:top-[30%] flex flex-col gap-2 md:gap-4">
         <h1
           className="text-white
-              z-20 text-xl lg:text-4xl xl:text-5xl font-bold max-w-[70%] "
+              z-20 text-md lg:text-4xl xl:text-5xl font-bold max-w-[70%] "
         >
           {movie?.title}
         </h1>
@@ -28,14 +28,14 @@ const Billboard = () => {
         >
           {movie?.description}
         </p>
-        <button className="bg-white flex  gap-1 items-center p-2 lg:px-6 lg:text-lg  bg-opacity-30 rounded  text-sm w-fit text-white hover:bg-opacity-40">
+        <button className="bg-white flex  gap-1 items-center p-2 lg:px-6 lg:text-lg bg-opacity-30 rounded  text-[10px] w-fit text-white hover:bg-opacity-40">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-4 h-4 md:h-6 md:w-6"
           >
             <path
               strokeLinecap="round"
