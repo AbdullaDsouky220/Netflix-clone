@@ -6,7 +6,7 @@ const Watch = () => {
   const router = useRouter();
   const { movieId } = router.query;
 
-  const { data } = useMovie(movieId );
+  const { data } = useMovie( );
   
   return (
     <>
