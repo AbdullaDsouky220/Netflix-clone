@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(405).end();
     }
 
-    const session = await getServerSession({ req });
+    const session = await getServerSession(req );
 
     if (!session?.user?.email) {
       throw new Error('Not signed in');
